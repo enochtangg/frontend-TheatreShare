@@ -8,14 +8,16 @@ import router from './router'
 import VueMaterial from 'vue-material'
 import 'vue-material/dist/vue-material.min.css'
 
-Vue.use(VueMaterial)
+import axios from './axios-backend/vue-axios'
 
-Vue.config.productionTip = false
+Vue.use(VueMaterial);
 
-/* eslint-disable no-new */
+Vue.config.productionTip = false;
+
 new Vue({
   el: '#app',
   router,
+  axios,
   components: { App },
   template: '<App/>'
 })

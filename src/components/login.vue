@@ -23,24 +23,45 @@
         <md-button class="md-raised" @click="login">Login</md-button>
       </md-card-actions>
     </md-card>
+    <div class="alert alert-danger" v-if="error">{{ error }}</div>
   </div>
 </template>
 
 <script>
   export default {
     name: "login",
+
     data() {
       return {
         username: '',
-        password: ''
+        password: '',
+        error: false
       }
     },
+
     methods: {
       login() {
-        alert(this.username)
-        alert(this.password)
+        this.$http.post('get-token/', {username: this.username, password: this.password})
+          .then(response => this.loginSuccessful(response))
+          .catch(() => this.loginFailed())
+      },
+
+      loginSuccessful(res) {
+        if (!res.data.token) {
+          this.loginFailed();
+          return
+        }
+
+        localStorage.token = res.data.token;
+        this.error = false;
+        this.$router.replace(this.$route.query.redirect || 'theatres/')
+      },
+
+      loginFailed() {
+        this.error = 'Login failed!';
+        delete localStorage.token
       }
-    }
+    },
   }
 </script>
 
@@ -50,3 +71,4 @@
     margin: auto;
   }
 </style>
+
