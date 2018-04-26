@@ -28,6 +28,8 @@
 </template>
 
 <script>
+  import {HTTP} from '../axios-backend/vue-axios/axios';
+
   export default {
     name: "login",
 
@@ -41,7 +43,7 @@
 
     methods: {
       login() {
-        this.$http.post('get-token/', {username: this.username, password: this.password})
+        HTTP.post('get-token/', {username: this.username, password: this.password})
           .then(response => this.loginSuccessful(response))
           .catch(() => this.loginFailed())
       },
