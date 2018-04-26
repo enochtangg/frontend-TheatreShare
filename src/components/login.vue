@@ -23,7 +23,8 @@
         <md-button class="md-raised" @click="login">Login</md-button>
       </md-card-actions>
     </md-card>
-    <div class="alert alert-danger" v-if="error">{{ error }}</div>
+    <div class="alert alert-danger" v-if="error" style="color: #e74c3c">{{ error }}</div>
+
   </div>
 </template>
 
@@ -60,7 +61,7 @@
       },
 
       loginFailed() {
-        this.error = 'Login failed!';
+        this.error = 'Login Failed. Please check credentials and try again!';
         delete localStorage.token
       }
     },
