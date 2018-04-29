@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <md-card>
+    <md-card class="login-card">
       <md-card-header>
         <md-card-header-text>
           <div class="md-title">TheatreShare Login</div>
@@ -57,7 +57,7 @@
 
         localStorage.token = res.data.token;
         this.error = false;
-        this.$router.replace(this.$route.query.redirect || 'theatres/')
+        this.$router.replace(this.$route.query.redirect || 'dashboard/')
       },
 
       loginFailed() {
@@ -72,6 +72,10 @@
   .container {
     width: 60%;
     margin: auto;
+  }
+
+  .login-card {
+    margin-top: 5%;
   }
 </style>
 
