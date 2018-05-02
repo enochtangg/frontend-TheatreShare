@@ -1,7 +1,7 @@
 <template>
   <div>
     <nav-bar></nav-bar>
-    <md-card class="auditorium-card" v-for="theatre in theatres">
+    <md-card class="auditorium-card" v-for="theatre in theatres" v-bind:data="theatre">
       <md-card-media-cover>
         <md-card-media>
           <img src="../assets/auditorium.png">
@@ -13,7 +13,7 @@
           </md-card-header>
 
           <md-card-actions>
-            <md-button class="md-raised">Enter Auditorium</md-button>
+            <md-button class="md-raised" @click="enterTheatre(theatre)">Enter Auditorium</md-button>
           </md-card-actions>
         </md-card-area>
       </md-card-media-cover>
@@ -45,23 +45,30 @@
       },
       getTheatreFailed() {
         alert('Could not query API for theatres')
+      },
+      enterTheatre(theatre) {
+        this.$router.push({
+          name: 'Theatre',
+          params: {
+            theatre: theatre
+          }
+        });
       }
     },
     mounted() {
       this.getTheatres()
     },
     components: {
-      NavBar,
-      'nav-bar': NavBar
+      NavBar: NavBar
     }
   }
 </script>
 
 <style scoped>
-.auditorium-card {
-  width: 25%;
-  float: left;
-  margin-left: 20px;
-  margin-top: 20px;
-}
+  .auditorium-card {
+    width: 25%;
+    float: left;
+    margin-left: 20px;
+    margin-top: 20px;
+  }
 </style>

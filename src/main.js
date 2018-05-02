@@ -4,12 +4,15 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 
-
+// Vue Material
 import VueMaterial from 'vue-material'
 import 'vue-material/dist/vue-material.min.css'
 import './stylesheets/style.css'
 
+import VueYouTubeEmbed from 'vue-youtube-embed'
+
 Vue.use(VueMaterial);
+Vue.use(VueYouTubeEmbed)
 
 Vue.config.productionTip = false;
 
