@@ -3,11 +3,6 @@
     <nav-bar></nav-bar>
     <div class="wrapper" id="center">
       <h1>{{theatre.name}}</h1>
-      <md-field>
-          <label>Youtube URL</label>
-          <md-input v-model="url" type="url"></md-input>
-        </md-field>
-      <md-button class="md-raised" @click="getVideoId">Submit</md-button>
       <p>{{theatre}}</p>
       <youtube :video-id="videoId"></youtube>
     </div>
@@ -19,21 +14,18 @@
 
   export default {
     name: "theatre",
+
     data() {
       return {
         videoId: '',
-        url: ''
       }
     },
     props: ['theatre'],
     components: {
       NavBar: NavBar
     },
-    methods: {
-      getVideoId() {
-        this.videoId = this.$youtube.getIdFromURL(this.url)
-        this.url = ''
-      },
+    mounted () {
+      this.videoId = this.$youtube.getIdFromURL(this.theatre.youtube_url)
     }
   }
 </script>
@@ -47,6 +39,9 @@
   .wrapper {
     width: 70%;
     margin: auto;
+  }
+
+  .video-player {
   }
 
 </style>

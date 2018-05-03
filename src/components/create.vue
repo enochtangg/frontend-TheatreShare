@@ -46,18 +46,22 @@
     },
     methods: {
       submit() {
-        axios.post('http://localhost:8000/theatres/', {
-          name: this.name,
-          youtube_url: this.url,
+        let headers = {
           headers: {
-            'Authorization': 'Token ' + localStorage.token
-          },
-        })
+            'Authorization': 'Token ' + localStorage.token,
+            'Content-Type': 'application/json',
+          }
+        };
+        let data = {
+          name: this.name,
+          youtube_url: this.url
+        };
+        axios.post('http://localhost:8000/theatres/', data, headers)
           .then(response => this.submitSuccessful(response))
           .catch(() => this.submitFailed())
       },
       submitSuccessful(res) {
-        alert(res)
+        console.log(res)
       },
       submitFailed() {
         alert('Could not submit to API')

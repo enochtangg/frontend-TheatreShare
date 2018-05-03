@@ -26,7 +26,7 @@ export default new Router({
       props: true,
     },
     {
-      path: 'create/',
+      path: '/create',
       name: 'Create',
       component: Create
     }
