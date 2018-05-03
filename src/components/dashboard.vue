@@ -1,6 +1,19 @@
 <template>
   <div>
     <nav-bar></nav-bar>
+    <md-card class="auditorium-card">
+      <md-card-media-cover>
+        <md-card-media>
+          <img src="../assets/add.png">
+        </md-card-media>
+        <md-card-area>
+          <md-card-actions>
+            <md-button class="md-raised" @click="createTheatre">Add</md-button>
+          </md-card-actions>
+        </md-card-area>
+      </md-card-media-cover>
+    </md-card>
+
     <md-card class="auditorium-card" v-for="theatre in theatres" v-bind:data="theatre">
       <md-card-media-cover>
         <md-card-media>
@@ -22,8 +35,8 @@
 </template>
 
 <script>
-  import {HTTP} from '../axios-backend/vue-axios/axios';
-  import NavBar from './nav.vue'
+  import NavBar from './navbar.vue'
+  import axios from 'axios';
 
   export default {
     name: "dashboard",
@@ -35,7 +48,7 @@
     },
     methods: {
       getTheatres() {
-        HTTP.get('theatres/', {
+        axios.get('http://localhost:8000/theatres/', {
           headers: {
             'Authorization': 'Token ' + localStorage.token
           },
@@ -52,6 +65,11 @@
           params: {
             theatre: theatre
           }
+        });
+      },
+      createTheatre() {
+        this.$router.push({
+          name: 'Create'
         });
       }
     },

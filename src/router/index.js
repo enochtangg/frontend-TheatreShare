@@ -3,8 +3,9 @@ import Router from 'vue-router'
 import Login from '@/components/login'
 import Dashboard from '@/components/dashboard'
 import Theatre from '@/components/theatre'
+import Create from '@/components/create'
 
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
   routes: [
@@ -19,10 +20,15 @@ export default new Router({
       component: Dashboard
     },
     {
-      path: '/theatre/',
+      path: '/theatre',
       name: 'Theatre',
       component: Theatre,
       props: true,
+    },
+    {
+      path: 'create/',
+      name: 'Create',
+      component: Create
     }
   ]
 })

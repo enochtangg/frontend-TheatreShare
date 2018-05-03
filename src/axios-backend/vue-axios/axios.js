@@ -2,9 +2,4 @@
 
 import axios from 'axios'
 
-export const HTTP = axios.create({
-  baseURL: 'http://localhost:8000/',
-  headers: {
-    'Authorization': 'Token ' + localStorage.token
-  }
-})
+axios.defaults.baseURL = 'http://localhost:8000/';

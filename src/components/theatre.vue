@@ -15,7 +15,7 @@
 </template>
 
 <script>
-  import NavBar from './nav.vue'
+  import NavBar from './navbar.vue'
 
   export default {
     name: "theatre",
@@ -32,7 +32,8 @@
     methods: {
       getVideoId() {
         this.videoId = this.$youtube.getIdFromURL(this.url)
-      }
+        this.url = ''
+      },
     }
   }
 </script>

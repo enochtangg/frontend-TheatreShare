@@ -29,7 +29,7 @@
 </template>
 
 <script>
-  import {HTTP} from '../axios-backend/vue-axios/axios';
+  import axios from 'axios';
 
   export default {
     name: "login",
@@ -44,7 +44,7 @@
 
     methods: {
       login() {
-        HTTP.post('get-token/', {username: this.username, password: this.password})
+        axios.post('http://localhost:8000/get-token/', {username: this.username, password: this.password})
           .then(response => this.loginSuccessful(response))
           .catch(() => this.loginFailed())
       },
@@ -54,10 +54,11 @@
           this.loginFailed();
           return
         }
-
-        localStorage.token = res.data.token;
-        this.error = false;
-        this.$router.replace(this.$route.query.redirect || 'dashboard/')
+        else {
+          localStorage.token = res.data.token;
+          this.error = false;
+          this.$router.replace(this.$route.query.redirect || 'dashboard/')
+        }
       },
 
       loginFailed() {
