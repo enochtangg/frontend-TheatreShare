@@ -8,7 +8,7 @@
 
 <script>
   export default {
-    name: "nav",
+    name: "top",
     methods: {
       logout() {
         delete localStorage.token;

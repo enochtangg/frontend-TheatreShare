@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav-bar></nav-bar>
+    <top></top>
     <md-card class="auditorium-card">
       <md-card-media-cover>
         <md-card-media>
@@ -14,7 +14,7 @@
       </md-card-media-cover>
     </md-card>
 
-    <md-card class="auditorium-card" v-for="theatre in theatres" v-bind:data="theatre">
+    <md-card class="auditorium-card" v-for="theatre in theatres" :key="theatre.id">
       <md-card-media-cover>
         <md-card-media>
           <img src="../assets/auditorium.png">
@@ -35,7 +35,7 @@
 </template>
 
 <script>
-  import NavBar from './navbar.vue'
+  import Top from './top.vue'
   import axios from 'axios';
 
   export default {
@@ -77,14 +77,14 @@
       this.getTheatres()
     },
     components: {
-      NavBar: NavBar
+      Top: Top
     }
   }
 </script>
 
 <style scoped>
   .auditorium-card {
-    width: 25%;
+    width: 23%;
     float: left;
     margin-left: 20px;
     margin-top: 20px;

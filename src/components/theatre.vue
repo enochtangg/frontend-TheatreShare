@@ -1,16 +1,18 @@
 <template>
   <div>
-    <nav-bar></nav-bar>
+    <top></top>
     <div class="wrapper" id="center">
       <h1>{{theatre.name}}</h1>
       <p>{{theatre}}</p>
       <youtube :video-id="videoId"></youtube>
+      <md-button class="md-raised" @click="deleteTheatre">Delete</md-button>
     </div>
   </div>
 </template>
 
 <script>
-  import NavBar from './navbar.vue'
+  import Top from './top.vue'
+  import axios from 'axios';
 
   export default {
     name: "theatre",
@@ -22,10 +24,15 @@
     },
     props: ['theatre'],
     components: {
-      NavBar: NavBar
+      Top: Top
     },
     mounted () {
       this.videoId = this.$youtube.getIdFromURL(this.theatre.youtube_url)
+    },
+    methods: {
+      deleteTheatre() {
+        axios.delete('http://localhost:8000/theatres/')
+      }
     }
   }
 </script>

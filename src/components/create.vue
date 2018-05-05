@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav-bar></nav-bar>
+    <top></top>
     <div class="container">
       <md-card class="create-card">
         <md-card-header>
@@ -30,13 +30,13 @@
 </template>
 
 <script>
-  import NavBar from './navbar.vue'
+  import Top from './top.vue'
   import axios from 'axios';
 
   export default {
     name: "create",
     components: {
-      NavBar: NavBar
+      Top: Top
     },
     data() {
       return {
