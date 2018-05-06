@@ -1,17 +1,18 @@
 <template>
   <div>
     <top></top>
-    <md-card class="auditorium-card">
-      <md-card-media-cover>
-        <md-card-media>
-          <img src="../assets/add.png">
-        </md-card-media>
-        <md-card-area>
-          <md-card-actions>
-            <md-button class="md-raised" @click="createTheatre">Add</md-button>
-          </md-card-actions>
-        </md-card-area>
-      </md-card-media-cover>
+    <md-card class="create-card">
+      <md-card-header>
+        <div class="md-title">Dashboard</div>
+      </md-card-header>
+
+      <md-card-content>
+        <p class="md-subheading">Listed below are all your theatre rooms you are active in</p>
+      </md-card-content>
+
+      <md-card-actions>
+        <md-button class="md-raised" @click="createTheatre">Create new theatre room</md-button>
+      </md-card-actions>
     </md-card>
 
     <md-card class="auditorium-card" v-for="theatre in theatres" :key="theatre.id">
@@ -88,5 +89,10 @@
     float: left;
     margin-left: 20px;
     margin-top: 20px;
+  }
+  .create-card {
+    width: 95%;
+    margin: auto;
+    margin-top: 15px;
   }
 </style>
