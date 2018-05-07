@@ -22,12 +22,12 @@
         videoId: '',
       }
     },
-    props: ['theatre'],
+    props: ['theatre', 'socket'],
     components: {
       Top: Top
     },
-    mounted () {
-      this.videoId = this.$youtube.getIdFromURL(this.theatre.youtube_url)
+    mounted() {
+      this.videoId = this.$youtube.getIdFromURL(this.theatre.youtube_url);
     },
     methods: {
       deleteTheatre() {

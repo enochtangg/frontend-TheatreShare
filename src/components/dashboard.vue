@@ -45,6 +45,7 @@
     data() {
       return {
         theatres: [],
+        socket: null
       }
     },
     methods: {
@@ -61,10 +62,16 @@
         alert('Could not query API for theatres')
       },
       enterTheatre(theatre) {
+        // Join room
+        this.socket.send(JSON.stringify({
+          "command": "join",
+          "theatre": theatre.id
+        }));
         this.$router.push({
           name: 'Theatre',
           params: {
-            theatre: theatre
+            theatre: theatre,
+            socket: this.socket
           }
         });
       },
@@ -75,7 +82,23 @@
       }
     },
     mounted() {
-      this.getTheatres()
+      this.getTheatres();
+
+      // Initial connection to backend websocket
+      // Correctly decide between ws:// and wss://
+      let ws_scheme = window.location.protocol == "https:" ? "wss" : "ws";
+      let ws_path = ws_scheme + '://localhost:8000' + "/chat/stream/";
+      console.log("Connecting to " + ws_path);
+      const ReconnectingWebSocket = require('reconnecting-websocket');
+      this.socket = new ReconnectingWebSocket(ws_path);
+
+      // Helpful debugging
+      this.socket.onopen = function () {
+        console.log("Connected to chat socket");
+      };
+      this.socket.onclose = function () {
+        console.log("Disconnected from chat socket");
+      }
     },
     components: {
       Top: Top
@@ -90,6 +113,7 @@
     margin-left: 20px;
     margin-top: 20px;
   }
+
   .create-card {
     width: 95%;
     margin: auto;

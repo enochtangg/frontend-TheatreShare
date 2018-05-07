@@ -11,8 +11,11 @@ import './stylesheets/style.css'
 
 import VueYouTubeEmbed from 'vue-youtube-embed'
 
+//jQuery
+window.$ = window.jQuery = require('jquery')
+
 Vue.use(VueMaterial);
-Vue.use(VueYouTubeEmbed)
+Vue.use(VueYouTubeEmbed);
 
 Vue.config.productionTip = false;
 
@@ -21,4 +24,6 @@ new Vue({
   router,
   components: { App },
   template: '<App/>'
-})
+});
+
+
