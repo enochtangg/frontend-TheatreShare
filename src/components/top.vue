@@ -1,7 +1,6 @@
 <template>
   <md-toolbar class="md-accent" md-elevation="1">
     <h2 class="md-title" style="flex: 1">Home</h2>
-    <md-button @click="goHome"><i class="material-icons">home</i></md-button>
     <md-button @click="logout"><i class="material-icons">power_settings_new</i></md-button>
   </md-toolbar>
 </template>

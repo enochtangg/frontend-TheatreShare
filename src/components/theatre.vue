@@ -6,6 +6,7 @@
       <p>{{theatre}}</p>
       <youtube :video-id="videoId"></youtube>
       <md-button class="md-raised" @click="deleteTheatre">Delete</md-button>
+      <md-button class="md-raised" @click="leaveTheatre">Leave</md-button>
     </div>
   </div>
 </template>
@@ -22,7 +23,7 @@
         videoId: '',
       }
     },
-    props: ['theatre', 'socket'],
+    props: ['theatre'],
     components: {
       Top: Top
     },
@@ -32,6 +33,16 @@
     methods: {
       deleteTheatre() {
         axios.delete('http://localhost:8000/theatres/')
+      },
+      leaveTheatre() {
+        // Leave room
+        window.socket.send(JSON.stringify({
+          "command": "leave",
+          "theatre": this.theatre.id
+        }));
+        this.$router.push({
+          name: 'Dashboard',
+        });
       }
     }
   }

@@ -58,7 +58,10 @@
         };
         axios.post('http://localhost:8000/theatres/', data, headers)
           .then(response => this.submitSuccessful(response))
-          .catch(() => this.submitFailed())
+          .catch(() => this.submitFailed());
+        this.$router.push({
+          name: 'Dashboard',
+        });
       },
       submitSuccessful(res) {
         console.log(res)
