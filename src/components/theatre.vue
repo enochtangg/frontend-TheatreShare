@@ -29,6 +29,8 @@
 <script>
   import Top from './top.vue'
   import axios from 'axios';
+  import socket from '../sockets/socket'
+  import incoming_data from '../sockets/observer'
 
   export default {
     name: "theatre",
@@ -51,16 +53,17 @@
 
       },
       sendMessage() {
-        window.socket.send(JSON.stringify({
+        socket.send(JSON.stringify({
           "command": "send",
           "theatre": this.theatre.id,
           "message": this.textarea
         }));
         this.textarea = '';
+        console.log(incoming_data)
       },
       leaveTheatre() {
         // Leave room
-        window.socket.send(JSON.stringify({
+        socket.send(JSON.stringify({
           "command": "leave",
           "theatre": this.theatre.id
         }));
@@ -73,6 +76,12 @@
         $(".output-box").append('<div class="individual-message-box" style="width: 95%; background-color: white; float: left; margin-top: 10px; margin-left: 10px; border-radius: 15px; display: block;"><p style="float; padding-left: 10px; padding-right: 10px;">Enoch: hi</p></div>');
       },
     },
+    watch: {
+      incoming_data: function () {
+        console.log('yay');
+        this.addBubble()
+      }
+    }
   };
 </script>
 

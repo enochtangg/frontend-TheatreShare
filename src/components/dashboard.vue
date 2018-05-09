@@ -38,6 +38,7 @@
 <script>
   import Top from './top.vue'
   import axios from 'axios';
+  import socket from '../sockets/socket'
 
   export default {
     name: "dashboard",
@@ -61,8 +62,7 @@
         alert('Could not query API for theatres')
       },
       enterTheatre(theatre) {
-        // Join room
-        window.socket.send(JSON.stringify({
+        socket.send(JSON.stringify({
           "command": "join",
           "theatre": theatre.id
         }));
