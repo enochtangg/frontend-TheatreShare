@@ -32,3 +32,6 @@ npm install;
 ```bash
 npm run dev;
 ```
+
+Configure backend-TheatreShare as well as start watching videos/chatting with friends!
+
