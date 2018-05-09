@@ -40,4 +40,16 @@ window.socket.onopen = function () {
 };
 window.socket.onclose = function () {
   console.log("Disconnected from chat socket");
-}
+};
+
+window.socket.onmessage = function (message) {
+  // Decode the JSON
+  console.log("Got websocket message " + message.data);
+  window.incoming_data = JSON.parse(message.data);
+  // Handle errors
+  if (window.incoming_data.error) {
+    alert(window.incoming_data.error);
+    return;
+  }
+};
+
