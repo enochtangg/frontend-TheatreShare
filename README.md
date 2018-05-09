@@ -27,7 +27,7 @@ cd frontend-TheatreShare;
 npm install;
 ```
 
-### Run the website!
+### Run the website
 
 ```bash
 npm run dev;
