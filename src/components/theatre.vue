@@ -5,7 +5,8 @@
       <div class="title">
         <h1>{{theatre.name}}</h1>
       </div>
-      <youtube :video-id="videoId" player-height="400" class="video-player"></youtube>
+      <youtube :video-id="videoId" @ready="ready" player-height="4000" class="video-player"
+               :player-vars="{controls: 0}"></youtube>
       <div class="chat-box">
         <div class="output-box">
 
@@ -20,8 +21,10 @@
         <md-button class="md-raised send-button" @click="sendMessage"><i class="material-icons">send</i></md-button>
 
       </div>
-      <md-button class="md-raised" @click="deleteTheatre">Delete</md-button>
+      <md-button class="md-raised" @click="pauseVideo">Pause</md-button>
+      <md-button class="md-raised" @click="playVideo">Play</md-button>
       <md-button class="md-raised" @click="leaveTheatre">Leave</md-button>
+      <md-button class="md-raised" @click="deleteTheatre">Delete</md-button>
     </div>
   </div>
 </template>
@@ -38,7 +41,8 @@
     data() {
       return {
         videoId: '',
-        textarea: ''
+        textarea: '',
+        player: null
       }
     },
     props: ['theatre'],
@@ -49,6 +53,10 @@
       this.videoId = this.$youtube.getIdFromURL(this.theatre.youtube_url);
     },
     methods: {
+      ready(player) {
+        this.player = player;
+        window.player = player
+      },
       deleteTheatre() {
 
       },
@@ -56,7 +64,8 @@
         socket.send(JSON.stringify({
           "command": "send",
           "theatre": this.theatre.id,
-          "message": this.textarea
+          "message": this.textarea,
+          "action": false
         }));
         this.textarea = '';
         console.log(incoming_data)
@@ -65,22 +74,31 @@
         // Leave room
         socket.send(JSON.stringify({
           "command": "leave",
-          "theatre": this.theatre.id
+          "theatre": this.theatre.id,
+          "message": 'leave'
         }));
         this.$router.push({
           name: 'Dashboard',
         });
       },
-      addBubble() {
-        console.log('yay');
-        $(".output-box").append('<div class="individual-message-box" style="width: 95%; background-color: white; float: left; margin-top: 10px; margin-left: 10px; border-radius: 15px; display: block;"><p style="float; padding-left: 10px; padding-right: 10px;">Enoch: hi</p></div>');
+      pauseVideo() {
+        this.player.pauseVideo();
+        socket.send(JSON.stringify({
+          "command": "send",
+          "theatre": this.theatre.id,
+          "message": "pause",
+          "action": true
+        }));
       },
-    },
-    watch: {
-      incoming_data: function () {
-        console.log('yay');
-        this.addBubble()
-      }
+      playVideo() {
+        this.player.playVideo();
+        socket.send(JSON.stringify({
+          "command": "send",
+          "theatre": this.theatre.id,
+          "message": "play",
+          "action": true
+        }));
+      },
     }
   };
 </script>
