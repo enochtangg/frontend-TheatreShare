@@ -29,8 +29,6 @@ npm install;
 
 ### Run the website!
 
-Starts django webserver. Don't use this in production.
-
 ```bash
 npm run dev;
 ```
