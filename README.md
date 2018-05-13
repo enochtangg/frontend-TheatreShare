@@ -17,7 +17,7 @@ faced was being able to dynamically alter vue components according to the socket
 ### Clone this project
 
 ```bash
-git clone git@github.com:enochtangg/frontend-TheatreShare.git
+git clone https://github.com/enochtangg/frontend-TheatreShare.git
 cd frontend-TheatreShare;
 ```
 
