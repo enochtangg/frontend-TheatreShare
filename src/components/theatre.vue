@@ -25,6 +25,12 @@
       <md-button class="md-raised" @click="playVideo">Play</md-button>
       <md-button class="md-raised" @click="leaveTheatre">Leave</md-button>
       <md-button class="md-raised" @click="deleteTheatre">Delete</md-button>
+      <div class="tracking-bar">
+        <div class="tracking-box">
+
+        </div>
+
+      </div>
     </div>
   </div>
 </template>
@@ -89,6 +95,9 @@
           "message": "pause",
           "action": true
         }));
+        console.log(this.player.getCurrentTime());
+        console.log(this.player.getDuration());
+        this.updateVideoTracking()
       },
       playVideo() {
         this.player.playVideo();
@@ -99,6 +108,9 @@
           "action": true
         }));
       },
+      updateVideoTracking() {
+        document.getElementById('tracking-box').setAttribute("style","width:50%");
+      }
     }
   };
 </script>
@@ -117,7 +129,7 @@
 
   .video-player {
     float: left;
-    width: 58%;
+    width: 60%;
     height: 450px;
   }
 
@@ -143,5 +155,18 @@
     width: 100%;
     height: 322px;
     overflow-y: auto;
+  }
+
+  .tracking-bar {
+    width: 58%;
+    height: 10px;
+    background-color: black;
+    margin-top: 30px;
+  }
+
+  .tracking-box {
+    width: 1%;
+    height: 10px;
+    background: red;
   }
 </style>
