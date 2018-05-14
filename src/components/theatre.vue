@@ -95,9 +95,6 @@
           "message": "pause",
           "action": true
         }));
-        console.log(this.player.getCurrentTime());
-        console.log(this.player.getDuration());
-        this.updateVideoTracking()
       },
       playVideo() {
         this.player.playVideo();
@@ -107,11 +104,14 @@
           "message": "play",
           "action": true
         }));
+        this.updateVideoTime()
       },
-      updateVideoTracking() {
-        document.getElementById('tracking-box').setAttribute("style","width:50%");
+      updateVideoTime() {
+        let widthPercentage = (this.player.getCurrentTime() / this.player.getDuration()) * 100;
+        document.getElementsByClassName('tracking-box')[0].style.width = widthPercentage.toString() + '%';
+        setTimeout(this.updateVideoTime, 1000)
       }
-    }
+    },
   };
 </script>
 
@@ -165,7 +165,7 @@
   }
 
   .tracking-box {
-    width: 1%;
+    width: 0%;
     height: 10px;
     background: red;
   }
