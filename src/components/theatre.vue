@@ -38,7 +38,7 @@
 <script>
   import Top from './top.vue'
   import socket from '../sockets/socket'
-  import incoming_data from '../sockets/observer'
+  import '../sockets/observer'
   import $ from 'jquery'
 
   export default {
