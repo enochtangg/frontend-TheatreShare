@@ -57,15 +57,23 @@
     },
     mounted() {
       this.videoId = this.$youtube.getIdFromURL(this.theatre.youtube_url);
+      window.theatre = this.theatre;
 
       $(".tracking-bar").click(function (e) {
         let parentOffset = $(this).parent().offset();
         let relX = e.pageX - parentOffset.left;
-        console.log(relX);
+
         let percentageX = (relX / 657.953125) * 100;
         document.getElementsByClassName('tracking-box')[0].style.width = percentageX.toString() + '%';
-        let timeInVideo = (percentageX * this.player.getDuration()) / 100;
-        this.player.seekTo(timeInVideo);
+        let timeInVideo = (percentageX * window.player.getDuration()) / 100;
+        window.player.seekTo(timeInVideo);
+
+        socket.send(JSON.stringify({
+          "command": "send",
+          "theatre": window.theatre.id,
+          "message": 'track-to-'+timeInVideo,
+          "action": true
+        }));
       });
     },
     methods: {

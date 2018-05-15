@@ -24,5 +24,8 @@ socket.onmessage = function (message) {
   else if (incoming_data.action == true && incoming_data.message == 'play') {
     window.player.playVideo();
   }
+  else if (incoming_data.action == true && incoming_data.message.substring(0, 9) == 'track-to-') {
+    window.player.seekTo(incoming_data.message.substring(9));
+  }
 };
 
