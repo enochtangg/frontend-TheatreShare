@@ -100,7 +100,7 @@
         socket.send(JSON.stringify({
           "command": "leave",
           "theatre": this.theatre.id,
-          "message": 'leave'
+          "message": 'leave:' + document.username
         }));
         this.$router.push({
           name: 'Dashboard',
