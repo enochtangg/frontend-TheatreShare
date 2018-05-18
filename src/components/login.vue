@@ -57,6 +57,7 @@
         else {
           localStorage.token = res.data.token;
           this.error = false;
+          document.username = this.username;
           this.$router.replace(this.$route.query.redirect || 'dashboard/')
         }
       },

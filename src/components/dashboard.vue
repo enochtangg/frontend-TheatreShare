@@ -65,7 +65,7 @@
         socket.send(JSON.stringify({
           "command": "join",
           "theatre": theatre.id,
-          "message": 'enter'
+          "message": 'enter:' + document.username
         }));
         this.$router.push({
           name: 'Theatre',
