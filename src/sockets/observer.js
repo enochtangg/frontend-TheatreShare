@@ -23,9 +23,16 @@ socket.onmessage = function (message) {
   }
   else if (incoming_data.action == true && incoming_data.message == 'play') {
     window.player.playVideo();
-  }
+    incrementVideoTime()
+    }
   else if (incoming_data.action == true && incoming_data.message.substring(0, 9) == 'track-to-') {
     window.player.seekTo(incoming_data.message.substring(9));
+  }
+
+  function incrementVideoTime() {
+    let widthPercentage = (window.player.getCurrentTime() / window.player.getDuration()) * 100;
+    document.getElementsByClassName('tracking-box')[0].style.width = widthPercentage.toString() + '%';
+    setTimeout(incrementVideoTime, 1000)
   }
 };
 

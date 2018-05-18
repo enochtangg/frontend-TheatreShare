@@ -5,8 +5,8 @@
       <div class="title">
         <h1>{{theatre.name}}</h1>
       </div>
-      <youtube :video-id="videoId" @ready="ready" player-height="4000" class="video-player"
-               :player-vars="{controls: 0}"></youtube>
+      <youtube :video-id="videoId" player-width="854" player-height="480" @ready="ready" :player-vars="{controls: 0}"
+               class="video-player"></youtube>
       <div class="chat-box">
         <div class="output-box">
 
@@ -62,8 +62,9 @@
       $(".tracking-bar").click(function (e) {
         let parentOffset = $(this).parent().offset();
         let relX = e.pageX - parentOffset.left;
+        console.log(relX)
 
-        let percentageX = (relX / 657.953125) * 100;
+        let percentageX = (relX / document.getElementsByClassName("tracking-bar")[0].offsetWidth) * 100;
         document.getElementsByClassName('tracking-box')[0].style.width = percentageX.toString() + '%';
         let timeInVideo = (percentageX * window.player.getDuration()) / 100;
         window.player.seekTo(timeInVideo);
@@ -148,13 +149,13 @@
 
   .video-player {
     float: left;
-    width: 60%;
+    width: 62%;
     height: 450px;
   }
 
   .chat-box {
     float: right;
-    width: 40%;
+    width: 38%;
     height: 450px;
     background-color: #34495e;
   }
@@ -184,7 +185,6 @@
   }
 
   .tracking-box {
-    width: 0%;
     height: 10px;
     background: red;
   }
