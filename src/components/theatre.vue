@@ -5,7 +5,8 @@
       <div class="title">
         <h1>{{theatre.name}}</h1>
       </div>
-      <youtube :video-id="videoId" player-width="854" player-height="480" @ready="ready" :player-vars="{controls: 0}"
+      <youtube :video-id="videoId" player-width="854" player-height="480" @ready="ready"
+               :player-vars="{controls: 0}"
                class="video-player"></youtube>
       <div class="chat-box">
         <div class="output-box">
@@ -59,10 +60,15 @@
       this.videoId = this.$youtube.getIdFromURL(this.theatre.youtube_url);
       window.theatre = this.theatre;
 
+      socket.send(JSON.stringify({
+        "command": "join",
+        "theatre": this.theatre.id,
+        "message": 'enter:' + document.username
+      }));
+
       $(".tracking-bar").click(function (e) {
         let parentOffset = $(this).parent().offset();
         let relX = e.pageX - parentOffset.left;
-        console.log(relX)
 
         let percentageX = (relX / document.getElementsByClassName("tracking-bar")[0].offsetWidth) * 100;
         document.getElementsByClassName('tracking-box')[0].style.width = percentageX.toString() + '%';
@@ -72,7 +78,7 @@
         socket.send(JSON.stringify({
           "command": "send",
           "theatre": window.theatre.id,
-          "message": 'track-to-'+timeInVideo,
+          "message": 'track-to-' + timeInVideo,
           "action": true
         }));
       });

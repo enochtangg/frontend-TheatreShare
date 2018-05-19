@@ -12,10 +12,10 @@ socket.onmessage = function (message) {
   if (incoming_data.msg_type == 0 && incoming_data.action == false) {
     $(".output-box").append('<div class="individual-message-box" style="width: 95%; background-color: white; float: left; margin-top: 10px; margin-left: 10px; border-radius: 15px; display: block;"><p style="float; padding-left: 10px; padding-right: 10px;">' + incoming_data.username + ': ' + incoming_data.message + '</p></div>');
   }
-  else if (incoming_data.msg_type == 4 && incoming_data.message.substring(0,5) == 'enter') {
+  else if (incoming_data.msg_type == 4 && incoming_data.message.substring(0, 5) == 'enter') {
     $(".output-box").append('<div class="individual-message-box" style="width: 95%; background-color: white; float: left; margin-top: 10px; margin-left: 10px; border-radius: 15px; display: block;"><p style="float; padding-left: 10px; padding-right: 10px;">' + incoming_data.message.substring(6) + ' has joined the room' + '</p></div>');
   }
-  else if (incoming_data.msg_type == 5 && incoming_data.message.substring(0,5) == 'leave') {
+  else if (incoming_data.msg_type == 5 && incoming_data.message.substring(0, 5) == 'leave') {
     $(".output-box").append('<div class="individual-message-box" style="width: 95%; background-color: white; float: left; margin-top: 10px; margin-left: 10px; border-radius: 15px; display: block;"><p style="float; padding-left: 10px; padding-right: 10px;">' + incoming_data.message.substring(6) + ' has left the room' + '</p></div>');
   }
   else if (incoming_data.action == true && incoming_data.message == 'pause') {
@@ -24,7 +24,7 @@ socket.onmessage = function (message) {
   else if (incoming_data.action == true && incoming_data.message == 'play') {
     window.player.playVideo();
     incrementVideoTime()
-    }
+  }
   else if (incoming_data.action == true && incoming_data.message.substring(0, 9) == 'track-to-') {
     window.player.seekTo(incoming_data.message.substring(9));
   }
